@@ -1,0 +1,18 @@
+var compliments = ["You did so great!", "Well done, sir!", "You're a champion!", "Never give up, winner!", "Congratulations!"]
+var Pick = (Math.random())
+if (Pick < 0.2 ) { 
+    Pick = 1
+}
+else if (Pick < 0.4 ) {
+    Pick = 2
+}
+else if (Pick < 0.6 ) {
+    Pick = 3
+}
+else if (Pick < 0.8 ) {
+    Pick = 4
+}
+else if (Pick < 1) {
+    Pick = 5
+}
+console.log(compliments[Pick])
