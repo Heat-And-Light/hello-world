@@ -1,0 +1,40 @@
+var user = prompt("The Black Knight appraoches, What weapon will you slay him with?").toLowerCase();
+var ready = prompt("Are you ready to fight? YES OR NO").toLowerCase();
+var areSure = prompt("Are you sure? YES OR NO").toLowerCase();
+if (ready === "yes") {ready === true} else {ready === false}
+if (areSure === "yes") {ready === true} else {ready === false}
+if (ready && areSure)
+{
+    if (ready || areSure)
+    {
+switch (user) 
+    {
+    case 'sword':
+        var isSharp = prompt("Is your sword sharp? YES OR NO").toLowerCase();
+        if (isSharp === "yes")
+        {console.log("You draw your sword and slay the Black Knight!")}
+        else
+        {console.log("You are no match for the Black Knight!")}
+        break;
+    case 'bow':
+        var isTaught = prompt("Is your bowstring taught? YES OR NO").toLowerCase();
+        if (isTaught === "yes"){
+        console.log("Your arrow flies true and you slay the Black Knight!")}
+        else
+        {console.log("Your arrow misses the Black Knight and you are defeated!")}
+        break;
+    case 'staff':
+        var manaFull = prompt("Is your mana full? YES OR NO").toLowerCase();
+        if (manaFull === "yes"){
+        console.log("You draw your staff and fireblast the Black Knight!")}
+        else
+        {console.log("Your spell has no effect on the Black Knight and he defeats you!")}
+        break;
+    default:
+        console.log("You search through your backpack and find no such weapon!")
+        break;
+    }
+}
+else
+{console.log("There will be no fight today!")}
+}
