@@ -1,12 +1,23 @@
+var Agenda = function() {
 var choice = prompt("Would you like to create a new activity?")
 if (choice === "yes") {
   var actName = prompt("What do you want to call this?");
   var actstartTime = prompt("When does this start?");
   var actendTime = prompt("When does this end?");
 
-  var Activity = {Name:actName, Starttime:actstartTime, Endtime:actendTime};
-  
+  var Activity = {
+    Name: actName,
+    Starttime: actstartTime,
+    Endtime: actendTime,
+  };
+
   confirm("To confirm, you are creating a new entry for " + Activity.Name + " that begins at " + Activity.Starttime + " and ends at " + Activity.Endtime + "?")
 } else {
   confirm("Okay then, Goodbye")
 }
+if (choice === "yes") {
+  var schedule = [1]
+  schedule[schedule.length] = Activity;
+}
+}
+Agenda();
