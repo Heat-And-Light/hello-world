@@ -1,1 +1,17 @@
-alert("You will now forge a new sword");var name = prompt("What will you name your new sword?");var ice = ["Ice", "Frost Aura", "Cold Aura", "Frozen Touch"]var burn = ["Fire", "Scortch", "Burning Aura", "Brimstone"]var shock = ["Shock", "Spark Touch", "Shock Aura", "Lightning Strike"]var typec = Math.random();if (typec > 0) {var type = ice}if (typec > 0.33) {var type = burn}if (typec > 0.66) {var type = shock}var dam = [1, 2, 3, 4, 5, 6, 10]var typep = (Math.floor(Math.random() * 3) + 1);var typed = (Math.floor(Math.random() * 7));var sword = "Your new sword, " + name + ", has rolled " + type[0] + " type damage with the special ability of " + type[typep] + " and a damage bonus of " + dam[typed];confirm(sword)
+alert("You will now forge a new sword");
+var name = prompt("What will you name your new sword?");
+var ice = ["Ice", "Frost Aura", "Cold Aura", "Frozen Touch"]
+var burn = ["Fire", "Scortch", "Burning Aura", "Brimstone"]
+var shock = ["Shock", "Spark Touch", "Shock Aura", "Lightning Strike"]
+
+var typec = Math.random();
+if (typec > 0) {var type = ice}
+if (typec > 0.33) {var type = burn}
+if (typec > 0.66) {var type = shock}
+
+var dam = [1, 2, 3, 4, 5, 6, 10]
+var typep = (Math.floor(Math.random() * 3) + 1);
+var typed = (Math.floor(Math.random() * 7));
+
+var sword = "Your new sword, " + name + ", has rolled " + type[0] + " type damage with the special ability of " + type[typep] + " and a damage bonus of " + dam[typed];
+confirm(sword)
