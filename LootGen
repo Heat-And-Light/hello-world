@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <h1>You Find A Chest!</h1>
+
+<style>
+img {
+  height: 75px;
+  width: 75px;
+}
+
+#LootButton {
+  padding: 10px 20px;
+  background-color: gold;
+  font-size: 18px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+tr,
+th,
+td {
+  padding: 5px;
+  font-size: 15px;
+  height: 75px;
+  width: 75px;
+  border: 1px solid black;
+}
+
+#chestPic {
+  border: 1px solid black;
+  height: 150px;
+  width: 150px;
+  padding: 1px;
+  display: inline;
+}
+
+</style>
+
+  </head>
+
+  <body>
+    <div>
+      <img id="chestPic" src="http://gdurl.com/6cNf">
+    </div>
+    <br>
+    <button id="LootButton" onclick="Loot(); OpenC()">Loot The Chest!</button>
+    <p>You pull from a chest: </p>
+    <p id="reward">
+      <br>
+    </p>
+    <table>
+      <tr>
+        <th id="slot0"></th>
+        <td><img id="slot0img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot1"></th>
+        <td><img id="slot1img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot2"></th>
+        <td><img id="slot2img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot3"></th>
+        <td><img id="slot3img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot4"></th>
+        <td><img id="slot4img" src="http://gdurl.com/tFc2"></td>
+      </tr>
+      <tr>
+        <th id="slot5"></th>
+        <td><img id="slot5img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot6"></th>
+        <td><img id="slot6img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot7"></th>
+        <td><img id="slot7img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot8"></th>
+        <td><img id="slot8img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot9"></th>
+        <td><img id="slot9img" src="http://gdurl.com/tFc2"></td>
+      </tr>
+      <tr>
+        <th id="slot10"></th>
+        <td><img id="slot10img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot11"></th>
+        <td><img id="slot11img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot12"></th>
+        <td><img id="slot12img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot13"></th>
+        <td><img id="slot13img" src="http://gdurl.com/tFc2"></td>
+        <th id="slot14"></th>
+        <td><img id="slot14img" src="http://gdurl.com/tFc2"></td>
+      </tr>
+    </table>
+
+<script>
+
+var damage = [1, 1, 1, 1, 1, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 20, 21, 22, 23, 24, 25, 50]
+var element = ["Fire", "Frost", "Shock"];
+var weapons = ["Sword", "Bow", "Staff", "Axe", "Dagger"];
+var inventory = [];
+var images = ["http://gdurl.com/tFc2", "http://gdurl.com/j45j", "http://gdurl.com/hhHB", "http://gdurl.com/CDRo", "http://gdurl.com/rFWY", "http://gdurl.com/Qrjv", "http://gdurl.com/7nzO", "http://gdurl.com/1BQe", "http://gdurl.com/wjTu", "http://gdurl.com/n3YA", "http://gdurl.com/hEfO", "http://gdurl.com/ngxp", "http://gdurl.com/nC9a", "http://gdurl.com/42fA", "http://gdurl.com/7PnC", "http://gdurl.com/3z71", "http://gdurl.com/jIGU", "http://gdurl.com/SiMI", "http://gdurl.com/H3Lt", "http://gdurl.com/jVlN", "http://gdurl.com/aCy4"]
+
+function Loot() {
+
+  function Maker(x) {
+    return x[Math.floor(Math.random() * x.length)].toString();
+  }
+  var status = " ";
+  var wchoice = Maker(weapons);
+  var echoice = Maker(element);
+  var dchoice = Maker(damage);
+  var wimg = "#";
+
+  if (dchoice >= 5) {
+    status = " Rare "
+  }
+  if (dchoice >= 10) {
+    status = " Legendary "
+  }
+  if (dchoice >= 50) {
+    status = " EPIC "
+  }
+
+  var looted = new Item(dchoice, echoice, wchoice, wimg);
+  var wepDesc = ("A new" + (status.toString()) + (looted.element).toString() + " " + (looted.type).toString() + " for bonus damage of " + (looted.damage).toString() + "!")
+  document.getElementById("reward").innerHTML = wepDesc;
+  inventory.splice(0, 0, looted);
+  InvSort();
+}
+
+function InvSort() {
+  for (x = 0; x < inventory.length; x++) {
+    document.getElementById("slot" + x.toString()).innerHTML = (inventory[x].element.toString() + " " + inventory[x].type).toString() + ", +" + inventory[x].damage.toString();
+    //Sword Code
+    if (inventory[x].type == "Sword") {
+      if (inventory[x].damage <= 4) {
+        document.getElementById("slot" + x.toString() + "img").src = images[1]
+      } else if (inventory[x].damage <= 9) {
+        document.getElementById("slot" + x.toString() + "img").src = images[2]
+      } else if (inventory[x].damage <= 49) {
+        document.getElementById("slot" + x.toString() + "img").src = images[3]
+      } else if (inventory[x].damage == 50) {
+        document.getElementById("slot" + x.toString() + "img").src = images[4]
+      }
+    }
+    //Dagger Code
+    if (inventory[x].type == "Dagger") {
+      if (inventory[x].damage <= 4) {
+        document.getElementById("slot" + x.toString() + "img").src = images[5]
+      } else if (inventory[x].damage <= 9) {
+        document.getElementById("slot" + x.toString() + "img").src = images[6]
+      } else if (inventory[x].damage <= 49) {
+        document.getElementById("slot" + x.toString() + "img").src = images[7]
+      } else if (inventory[x].damage == 50) {
+        document.getElementById("slot" + x.toString() + "img").src = images[8]
+      }
+    }
+    //Staff Code
+    if (inventory[x].type == "Staff") {
+      if (inventory[x].damage <= 4) {
+        document.getElementById("slot" + x.toString() + "img").src = images[9]
+      } else if (inventory[x].damage <= 9) {
+        document.getElementById("slot" + x.toString() + "img").src = images[10]
+      } else if (inventory[x].damage <= 49) {
+        document.getElementById("slot" + x.toString() + "img").src = images[11]
+      } else if (inventory[x].damage == 50) {
+        document.getElementById("slot" + x.toString() + "img").src = images[12]
+      }
+    }
+    //Axe Code
+    if (inventory[x].type == "Axe") {
+      if (inventory[x].damage <= 4) {
+        document.getElementById("slot" + x.toString() + "img").src = images[13]
+      } else if (inventory[x].damage <= 9) {
+        document.getElementById("slot" + x.toString() + "img").src = images[14]
+      } else if (inventory[x].damage <= 49) {
+        document.getElementById("slot" + x.toString() + "img").src = images[15]
+      } else if (inventory[x].damage == 50) {
+        document.getElementById("slot" + x.toString() + "img").src = images[16]
+      }
+    }
+    //Bow Code
+    if (inventory[x].type == "Bow") {
+      if (inventory[x].damage <= 4) {
+        document.getElementById("slot" + x.toString() + "img").src = images[17]
+      } else if (inventory[x].damage <= 9) {
+        document.getElementById("slot" + x.toString() + "img").src = images[18]
+      } else if (inventory[x].damage <= 49) {
+        document.getElementById("slot" + x.toString() + "img").src = images[19]
+      } else if (inventory[x].damage == 50) {
+        document.getElementById("slot" + x.toString() + "img").src = images[20]
+      }
+    }
+  }
+}
+
+function Item(x, y, z, a) {
+  this.damage = x;
+  this.element = y;
+  this.type = z;
+  this.img = a;
+}
+
+function OpenC() {
+  document.getElementById("chestPic").src = "http://gdurl.com/I667";
+}
+
+
+</script>
+
+  </body>
+
+</html>
