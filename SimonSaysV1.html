@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <title>Let's Play Simon Says!</title>
+  <div id="header">
+    <h1>
+  Simon Says!
+  </h1>
+    <p id="desc">
+      Simon will play a sequence of colors. You must match the pattern for as long as you can to build your score. Score builds with each successive level of the pattern performed. Good Luck!
+    </p>
+    <div id="scores">
+      <p>
+        Player Score:
+      </p>
+      <p id="isq">
+
+      </p>
+    </div>
+    <p id="flytextwheel">
+
+    </p>
+     
+  </div>
+<style>
+* {
+  border-radius: 10px;
+}
+
+#R,
+#B,
+#G,
+#Y {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  transition: 0.5s;
+  box-shadow: 3px 3px darkgrey;
+  margin: auto;
+}
+
+#R {
+  background: red;
+}
+
+#G {
+  background: green;
+  top: 100px;
+}
+
+#B {
+  background: blue;
+  top: 200px;
+}
+
+#Y {
+  background: gold;
+  top: 300px;
+}
+
+#gameboard {
+  border: 50px solid PaleTurquoise;
+  padding: 50px;
+}
+
+#ss,
+#restart {
+  min-height: 100px;
+  width: 50%;
+  font-size: 28px;
+  display: inline;
+  font-weight: bold;
+  border: 1px solid black;
+  box-shadow: 3px 3px darkgrey;
+}
+
+#restart {
+  float: left;
+}
+
+#ss {
+  float: right;
+}
+
+#isq {
+  height: 50px;
+  border: 1px solid black;
+  font-size: 25px;
+  width: 100px;
+  text-align: center;
+}
+h1 {
+  font-size:50px;
+}
+#scores {
+  font-size:24px;
+}
+#flytextwheel {
+  height:25px;
+  color:purple;
+  margin:auto;
+}
+</style>
+  </head>
+
+  <body>
+    <div id="gameboard">
+      <div id="R" onclick="ssR()"></div>
+      <div id="G" onclick="ssG()"></div>
+      <div id="B" onclick="ssB()"></div>
+      <div id="Y" onclick="ssY()"></div>
+    </div>
+    <input type="button" id="ss" value="SIMON SAYS" onclick="simonSays()">
+    <input type="button" id="restart" value="RESTART" onclick="breakDown()">
+<script>
+var choices = ["R", "G", "B", "Y"];
+var order = [];
+var iorder = [];
+var round = 0;
+var match = 0;
+var score = 0;
+
+function ssR() {
+  iorder.push("R");
+  checkScore();
+  document.getElementById("R").style = "background:White";
+  setTimeout(cleaner, 200);
+}
+
+function ssG() {
+  iorder.push("G");
+  checkScore();
+  document.getElementById("G").style = "background:White";
+  setTimeout(cleaner, 200);
+}
+
+function ssB() {
+  iorder.push("B");
+  checkScore();
+  document.getElementById("B").style = "background:White";
+  setTimeout(cleaner, 200);
+}
+
+function ssY() {
+  iorder.push("Y");
+  checkScore();
+  document.getElementById("Y").style = "background:White";
+  setTimeout(cleaner, 200);
+}
+
+function flyText() {
+  document.getElementById("isq").innerHTML = (score.toString());
+}
+
+function checkScore() {
+  if (order[match] === iorder[match]) {
+    match++
+    score++
+    if (match === round) {
+      document.getElementById("flytextwheel").innerHTML = "Correct!";
+      match = 0;
+      flyText();
+      setTimeout(simonSays, 1500);
+    }
+  } else {
+    window.alert("loser");
+    breakDown();
+  }
+}
+
+function simonSays() {
+  document.getElementById("flytextwheel").innerHTML = "";
+  iorder = [];
+  checking = 1;
+  var selection = choices[(Math.floor(Math.random() * choices.length))];
+  order.push(selection);
+  indicate();
+  round++
+}
+
+function indicate() {
+  if (checking <= order.length) {
+    document.getElementById(order[checking - 1]).style = "background:White";
+    setTimeout(indicate, 1000);
+    setTimeout(cleaner, 750);
+    checking++
+  }
+}
+
+function cleaner() {
+  document.getElementById("R").style = "background:Red";
+  document.getElementById("G").style = "background:Green";
+  document.getElementById("B").style = "background:Blue";
+  document.getElementById("Y").style = "background:Yellow";
+}
+
+function breakDown() {
+  location.reload();
+}
+
+</script>
+  </body>
+
+</html>

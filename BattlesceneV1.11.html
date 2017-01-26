@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+<style>
+#frame {
+  border: 1px solid black;
+  padding: 25px;
+  max-height: 1500px;
+  background: linear-gradient(to bottom right, black, grey);
+}
+
+#title {
+  font-size: 28px;
+  color: white;
+  text-transfrom: uppercase;
+  border:1px solid white;
+  padding:10px;
+}
+
+#shipone,
+#shiptwo {
+  border: 1px dashed black;
+}
+
+#S1HH,
+#S2HH {
+  background: limegreen;
+  height: 50px;
+}
+
+#battlelog {
+  height: 20%;
+  border: 1px solid black;
+  padding: 5px;
+  background: white;
+}
+
+table {
+  height: 175px;
+  font-size: 18px;
+}
+
+td {
+  height: 50px;
+}
+
+#S1H,
+#S2H {
+  color: white;
+  font-size: 3em;
+  vertical-align: middle;
+}
+
+#shipone {
+  background: darksalmon;
+}
+
+#shiptwo {
+  background: lightblue;
+}
+
+#battlebutton {
+  height: 75px;
+  width: 300px;
+  font-size: 40px;
+  background: gold;
+  color: black;
+}
+</style>
+  </head>
+
+  <body>
+    <div id="frame">
+      <p id="title">SHIP BATTLESPACE</p>
+      <div id="shipone">
+        <img height=100%; width=100%; src="http://gdurl.com/qR59" />
+      </div>
+      <div id="S1HH">
+        <p id="S1H">100</p>
+      </div>
+      <br>
+      <div id="battlelog">
+        <table>
+          <tr></tr>
+          <td id="t1"></td>
+          <tr></tr>
+          <td id="t2"></td>
+          <tr></tr>
+          <td id="t3"></td>
+        </table>
+      </div>
+      <br>
+      <div id="shiptwo">
+        <img height=100%; width=100%; src="http://gdurl.com/TRAU" />
+      </div>
+      <div id="S2HH">
+        <p id="S2H">100</p>
+      </div>
+      <br>
+      <input type="button" id="battlebutton" value="BATTLE" onclick="setInterval(Wreck, 2000)">
+      <p id="battlescene"></p>
+    </div>
+
+<script>
+var batLog = ["", "", ""];
+
+function Wreck() {
+  var A = Number(document.getElementById("S1H").innerHTML);
+  var B = Number(document.getElementById("S2H").innerHTML);
+  var damage = Math.round(Math.floor(Math.random() * 10) + 1);
+  var shooter = Math.random();
+  if (shooter > 0.5) {
+    var A = Number(A - damage);
+    document.getElementById("S1H").innerHTML = A.toString();
+    var bar = "Red Ship takes " + damage.toString() + " damage to it's hull!"
+    batLog.splice(0, 0, bar);
+    FlyText(bar)
+  }
+  if (shooter < 0.5) {
+    var B = Number(B - damage);
+    document.getElementById("S2H").innerHTML = B.toString();
+    var bar = ("Blue Ship takes " + damage.toString() + " damage to it's hull!");
+    batLog.splice(0, 0, bar);
+    FlyText(bar)
+  }
+  dchex();
+}
+
+function FlyText() {
+  document.getElementById("t1").innerHTML = (batLog[0]);
+  document.getElementById("t2").innerHTML = (batLog[1]);
+  document.getElementById("t3").innerHTML = (batLog[2]);
+}
+
+function dchex() {
+  var s1hx = Number(document.getElementById("S1H").innerHTML);
+  var s2hx = Number(document.getElementById("S2H").innerHTML);
+  document.getElementById("S1HH").style = ("width:" + (s1hx) + "%");
+  document.getElementById("S2HH").style = ("width:" + (s2hx) + "%");
+  if (s1hx < 50) {
+    document.getElementById("S1HH").style.cssText = "background: orange; width:" + (s1hx) + "%"
+  };
+  if (s2hx < 50) {
+    document.getElementById("S2HH").style.cssText = "background: orange; width:" + (s2hx) + "%"
+  };
+  if (s1hx < 25) {
+    document.getElementById("S1HH").style.cssText = "background: red; width:" + (s1hx) + "%"
+  };
+  if (s2hx < 25) {
+    document.getElementById("S2HH").style.cssText = "background: red; width:" + (s2hx) + "%"
+  };
+  if (s1hx <= 0) {
+    window.alert("Red Ship Wins!");
+    clearInterval(Wreck);
+    crashOver();
+  }
+  if (s2hx <= 0) {
+    window.alert("Blue Ship Wins!");
+    clearInterval(Wreck);
+    crashOver();
+  }
+}
+
+function crashOver() {
+  location.reload()
+}
+
+</script>
+  </body>
+
+</html>
